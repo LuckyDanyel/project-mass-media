@@ -1,0 +1,5 @@
+version: '3.8'
+
+services:
+  node-engine:
+    command: ["npm ci && npm run build; npm run start:dev"]

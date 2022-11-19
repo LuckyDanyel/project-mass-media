@@ -1,2 +1,3 @@
 /Engine-search-service/dist
 /Engine-search-service/node_modules
+docker-compose.override.yml
