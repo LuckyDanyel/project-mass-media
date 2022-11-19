@@ -1,26 +1,59 @@
-// - сборка проекта для разработки
-// Для сборки проекта в режиме develop требуется находится в корневой директории -> Mass media и прописать команду
-docker compose -f docker-compose-develop.yml up --build -d
-// Надо будет подождать пока все все сервисы установятся, наблюдать за этим можно:
-docker compose -f docker-compose-develop.yml --follow
 
-// Для того чтобы потушить контейнеры прописываем:
-docker compose -f docker-compose-develop.yml down
-// Зайти в сервисы:
-docker compose -f docker-compose-develop.yml exec "name service" bash
-// Пример
-docker compose -f docker-compose-develop.yml exec node-engine bash
+# Mass media analytics and data collection
+
+This project for University helpers in analyze mass media 
 
 
-// - сборка проекта для production
-// Для сборки проекта в режиме production требуется находится в корневой директории -> Mass media и прописать команду
-docker compose -f docker-compose-production.yml up --build -d
-// Надо будет подождать пока все все сервисы установятся, наблюдать за этим можно:
-docker compose -f docker-compose-production.yml --follow
+## Tech Stack
 
-// Для того чтобы потушить контейнеры прописываем:
-docker compose -f docker-compose-production.yml down
-// Зайти в сервисы:
-docker compose -f docker-compose-production.yml exec "name service" bash
-// Пример
-docker compose -f docker-compose-production.yml exec node-engine bash
+**Client:** Vue, Vuex
+
+**Server:** Node(Nest js), Python, Ruby, Java
+
+
+## Deployment develop
+
+Build project for developers
+
+Требуется находится в корневой директории -> Mass media
+
+```bash
+  docker compose -f docker-compose-develop.yml up --build -d
+```
+
+## Deployment production
+
+Build project for developers
+
+Требуется находится в корневой директории -> Mass media
+
+```bash
+  docker compose -f docker-compose-production.yml up --build -d
+```
+
+## Deployment helpers
+
+Наблюдать за тем, пока все сервисы установятся
+
+```bash
+  docker compose -f docker-compose-develop.yml --follow
+```
+Потушить контейнеры
+
+```bash
+  docker compose -f docker-compose-develop.yml down
+```
+
+Зайти в сервис "name service" -> node-engine
+
+```bash
+  docker compose -f docker-compose-develop.yml exec "name service" bash
+```
+## Authors
+
+- [@Даниил](https://vk.com/luckydanyel)
+- [@Юра](https://vk.com/exe_shnik)
+- [@Алим](https://vk.com/id504461497)
+- [@Денис](https://vk.com/id171573907)
+- [@Влада](https://vk.com/vladavarmaz)
+- [@Света](https://vk.com/id161375814)
