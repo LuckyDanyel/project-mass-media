@@ -18,7 +18,7 @@ Build project for developers
 Требуется находится в корневой директории -> Mass media
 
 ```bash
-  docker compose -f docker-compose-develop.yml up --build -d
+  docker compose up --build -d
 ```
 
 ## Deployment production
@@ -36,18 +36,18 @@ Build project for production version
 Наблюдать за тем, пока все сервисы установятся
 
 ```bash
-  docker compose -f docker-compose-develop.yml --follow
+  docker compose --follow
 ```
 Потушить контейнеры
 
 ```bash
-  docker compose -f docker-compose-develop.yml down
+  docker compose down
 ```
 
 Зайти в сервис "name service" -> node-engine
 
 ```bash
-  docker compose -f docker-compose-develop.yml exec "name service" bash
+  docker compose exec "name service" bash
 ```
 ## Authors
 
