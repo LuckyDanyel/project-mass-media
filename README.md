@@ -23,7 +23,7 @@ Build project for developers
 
 ## Deployment production
 
-Build project for developers
+Build project for production version
 
 Требуется находится в корневой директории -> Mass media
 
