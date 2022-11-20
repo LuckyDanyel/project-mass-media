@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage("verify tooling") {
       steps {
+        sh 'service docker start'
         sh '''
           docker version
           docker info
@@ -14,7 +15,6 @@ pipeline {
     }
     stage('Start container') {
       steps {
-        sh 'service docker start'
         sh 'docker compose up -d'
         sh 'docker compose ps'
       }
