@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  elastic-search:
+    image: elasticsearch:8.5.1
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - es-net
+    ports:
+      - 9200:9200
+    volumes:
+      - dataes01:/usr/share/elasticsearch/data
   node-engine:
     image: service-engine
     build:
@@ -11,5 +22,16 @@ services:
     volumes:
       - ./Engine-search-service:/app
     tty: true
+    depends_on:
+      - elastic-search
+    networks:
+      - es-net
     entrypoint: ["/bin/bash", "-c"]
     command: ["npm ci && npm run build && npm run start:dev"]
+
+volumes:
+  dataes01:
+    driver: flocker
+networks:
+  es-net:
+    driver: bridge
