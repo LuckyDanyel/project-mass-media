@@ -7,7 +7,7 @@ pipeline {
         sh '''
           docker version
           docker info
-          docker compose version 
+          sudo docker compose version 
           curl --version
           jq --version
         '''
@@ -15,8 +15,8 @@ pipeline {
     }
     stage('Start container') {
       steps {
-        sh 'docker compose up -d'
-        sh 'docker compose ps'
+        sh 'sudo docker compose up -d'
+        sh 'sudo docker compose ps'
       }
     }
   }
