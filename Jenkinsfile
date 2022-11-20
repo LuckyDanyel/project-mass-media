@@ -8,8 +8,6 @@ pipeline {
           docker version
           docker info
           sudo docker compose version 
-          curl --version
-          jq --version
         '''
       }
     }
