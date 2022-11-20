@@ -16,16 +16,18 @@ services:
     image: service-engine
     build:
       context: .
-      target: production
-      dockerfile: ./Engine-search-service/deploy/production/Dockerfile
+      dockerfile: ./deploy/develop/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    tty: true
     depends_on:
       - elastic-search
     networks:
       - es-net
-    ports:
-      - 3000:3000
-    command: npm run start:prod
-    restart: always
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["npm ci && npm run build && npm run start:dev"]
 
 volumes:
   dataes01:
