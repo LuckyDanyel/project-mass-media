@@ -14,7 +14,8 @@ pipeline {
     }
     stage('Start container') {
       steps {
-        sh 'docker compose up -d --no-color --wait'
+        sh 'service docker start'
+        sh 'docker compose up -d'
         sh 'docker compose ps'
       }
     }
