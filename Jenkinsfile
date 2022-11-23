@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage("verify tooling") {
       steps {
+        sh 'sudo service docker start'
         sh 'docker compose down'
         sh 'sudo docker system prune -a -f'
         sh '''
