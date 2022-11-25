@@ -8,7 +8,7 @@ pipeline {
     }
     stage("delete images stage") {
       steps {
-        sh 'sudo docker system prune --volumes --all'
+        sh 'sudo docker system prune -a -f'
       }
     }
     stage("build images for container") {
