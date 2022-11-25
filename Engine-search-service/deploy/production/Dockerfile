@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY Engine-search-service/ /app
 
-RUN npm install --omit=dev
+RUN npm install --omit=dev && npm install @nestjs/cli
 RUN npm run build
 
 FROM node:18.12.1 as production
