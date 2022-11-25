@@ -1,39 +1,18 @@
-###################
-# BUILD FOR LOCAL DEVELOPMENT
-###################
-
-FROM node:18.12.1-alpine As development
-
-# Create app directory
-WORKDIR /app
-COPY --chown=node:node package*.json ./
-RUN npm ci
-COPY --chown=node:node . .
-
-USER node
-
-FROM node:18.12.1-alpine As build
+FROM node:18.12.1 as builder
 
 WORKDIR /app
 
-COPY --chown=node:node package*.json ./
+COPY Engine-search-service/ /app
 
-COPY --chown=node:node --from=development app/node_modules ./node_modules
-
-COPY --chown=node:node . .
-
+RUN npm install
 RUN npm run build
 
-ENV NODE_ENV production
+FROM node:18.12.1 as production
 
-RUN npm ci --only=production && npm cache clean --force
+COPY --from=builder app/package.json ./
+COPY --from=builder app/dist ./dist
 
-USER node
+RUN npm run install --omit=dev
 
-FROM node:18.12.1-alpine As production
-
-# Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /app/node_modules ./node_modules
-COPY --chown=node:node --from=build /app/dist ./dist
 
 
