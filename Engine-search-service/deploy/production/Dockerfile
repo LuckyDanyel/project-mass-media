@@ -2,7 +2,7 @@
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
 
-FROM node:18-alpine As development
+FROM node:18.2 As development
 
 # Create app directory
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY --chown=node:node . .
 
 USER node
 
-FROM node:18-alpine As build
+FROM node:18.2 As build
 
 WORKDIR /app
 
@@ -30,7 +30,7 @@ RUN npm ci --only=production && npm cache clean --force
 
 USER node
 
-FROM node:18-alpine As production
+FROM node:18.2 As production
 
 # Copy the bundled code from the build stage to the production image
 COPY --chown=node:node --from=build /app/node_modules ./node_modules
