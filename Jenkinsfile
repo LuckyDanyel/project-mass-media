@@ -1,14 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage("pulling stage") {
+    stage("pulling") {
       steps {
         sh 'sudo docker pull elasticsearch:8.5.1'
-      }
-    }
-    stage("delete images stage") {
-      steps {
-        sh 'sudo docker system prune -a -f'
       }
     }
     stage("build images for container") {
@@ -24,6 +19,11 @@ pipeline {
     stage('Start containers') {
       steps {
         sh 'sudo docker compose up -d'
+      }
+    }
+    stage("delete images") {
+      steps {
+        sh 'sudo docker system prune -a -f'
       }
     }
   }
