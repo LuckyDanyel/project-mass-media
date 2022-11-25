@@ -11,7 +11,7 @@ FROM node:18.12.1 as production
 COPY --from=builder app/package.json ./
 COPY --from=builder app/dist ./dist
 
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 
 
