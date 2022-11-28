@@ -8,19 +8,23 @@ services:
       - "discovery.type=single-node"
     networks:
       - es-net
+    env_file:
+      - .env
     ports:
-      - 9200:9200
+      - ${ELASTIC_PORT}:${ELASTIC_PORT}
     volumes:
-      - dataes01:/usr/share/elasticsearch/data
+      - dataesdev01:/usr/share/elasticsearch/data
   node-engine:
     image: service-engine
     build:
       context: .
-      dockerfile: ./deploy/develop/Dockerfile
+      dockerfile: Engine-search-service/deploy/develop/Dockerfile
+    env_file:
+      - .env
     ports:
-      - 3000:3000
+      - ${ENGINE_SEARCH_PORT}:${ENGINE_SEARCH_PORT}
     volumes:
-      - ./:/app
+      - ./Engine-search-service/:/app
     tty: true
     depends_on:
       - elastic-search
@@ -30,7 +34,7 @@ services:
     command: ["npm ci && npm run build && npm run start:dev"]
 
 volumes:
-  dataes01:
+  dataesdev01:
     driver: local
 networks:
   es-net:
