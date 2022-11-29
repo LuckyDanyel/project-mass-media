@@ -9,21 +9,25 @@ services:
     networks:
       - es-net
     ports:
-      - 9200:9200
+      - ${ELASTIC_PORT}:${ELASTIC_PORT}
     volumes:
       - dataes01:/usr/share/elasticsearch/data
+    env_file:
+      - .env
   node-engine:
     image: service-engine
     build:
       context: .
       target: production
       dockerfile: ./Engine-search-service/deploy/production/Dockerfile
+    env_file:
+      - .env
     depends_on:
       - elastic-search
     networks:
       - es-net
     ports:
-      - 3000:3000
+      - ${ENGINE_SEARCH_PORT}:${ENGINE_SEARCH_PORT}
     command: npm run start:prod
     restart: always
 

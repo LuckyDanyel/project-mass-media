@@ -9,8 +9,10 @@ RUN npm run build
 
 FROM node:18.12.1 as production
 
-COPY --from=builder app/package.json ./
-COPY --from=builder app/dist ./dist
+WORKDIR /app
+
+COPY --from=builder app/package.json app/
+COPY --from=builder app/dist app/dist
 
 RUN npm install --omit=dev
 
